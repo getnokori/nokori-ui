@@ -1,0 +1,167 @@
+$namespace: 'xmx'; // change the 'mx' to 'xmx'. then <date-picker prefix-class="xmx" />
+
+.xmx-datepicker-main {
+  font-size: 15px;
+  line-height: 24px;
+  padding-left: 5px;
+}
+
+.xmx-btn {
+  font-weight: 400;
+  letter-spacing: 0.02rem;
+  padding-right:5px;
+}
+
+.xmx-datepicker {
+  display: block !important;
+  width: auto !important;
+}
+
+.xmx-icon-calendar {
+  display: none !important;
+}
+
+.xmx-datepicker-popup {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  background-color: rgb(33 34 38) !important;
+  border-radius: 0.5rem;
+}
+
+
+.xmx-datepicker-sidebar {
+  padding-top: 24px !important;
+  float: none !important;
+  width: 149px !important;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.xmx-datepicker-sidebar > .xmx-btn {
+  display: block;
+  line-height: 24px;
+  margin-top: 3px;
+  font-weight: 400;
+  letter-spacing: .03rem;
+}
+
+.xmx-datepicker-sidebar > .xmx-btn:hover{
+  background-color: #27282c !important;
+  color:#FFF !important;
+}
+
+.xmx-btn-shortcut {
+  line-height: 2rem !important;
+}
+
+.xmx-calendar-header {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+
+.xmx-datepicker-content {
+  margin-left: 0 !important;
+  width: auto;
+  display:flex;
+  box-sizing: content-box;
+}
+
+.xmx-btn-icon-double-left,
+.xmx-btn-icon-double-right {
+  display: none;
+}
+
+.xmx-icon-left:before,
+.xmx-icon-right:before{
+  height: 13px!important;
+  width: 13px!important;
+}
+
+.xmx-table-date thead {
+  font-size: 12px!important;
+}
+
+.xmx-calendar-content{
+  padding: 12px 32px 32px;
+  height: inherit!important;
+}
+
+.xmx-calendar-content .cell:hover{
+  border-radius: 3px;
+  background-color: #27282c !important;
+  color:#FFF !important;
+}
+
+.xmx-calendar-header-label {
+  font-weight: 600 !important;
+}
+
+
+
+.xmx-calendar-range > .xmx-calendar-panel-date{
+  padding-top: 24px;
+  width: 400px !important;
+}
+
+.xmx-date-row {
+  .cell{
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+  }
+}
+
+.xmx-table-date {
+  .cell.not-current-month {
+    color: #777 !important;
+  }
+
+  & .tbody > td,
+  & .tbody > th {
+    font-size: 14px !important;
+  }
+}
+
+
+.xmx-zoom-in-down-enter-active,
+.xmx-zoom-in-down-leave-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: none !important;
+}
+
+.xmx-zoom-in-down-enter,
+.xmx-zoom-in-down-enter-from,
+.xmx-zoom-in-down-leave-to {
+  opacity: 0;
+  transform: scaleY(1);
+}
+
+$default-color: #e8e8e8;
+$primary-color: rgb(66,137,247);
+$white-color: #fff;
+
+// $default-color: $white-color;
+// $primary-color: $primary-color;
+
+$today-color: $primary-color;
+
+$border-color: #36363a;
+
+$disabled-color: #666;
+$disabled-background-color: #444;
+
+$calendar-active-color: $white-color;
+$calendar-active-background-color: $primary-color;
+
+// $calendar-hover-color: $white-color;
+// $calendar-hover-background-color: rgba($primary-color, 0.25);
+
+$calendar-in-range-color: #7491ff;
+$calendar-in-range-background-color: rgba($primary-color, 0.05);
+$today-color: #fff;
+
+@import 'vue-datepicker-next/scss/index.scss';

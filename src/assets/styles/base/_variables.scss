@@ -1,0 +1,56 @@
+/* prettier-ignore */
+:root {
+  // Grid
+  --grid-padding: 1.25rem;
+
+  // Fonts
+  --base-font-family: 'SFProDisplay', system-ui, sans-serif;
+  --code-font-family: 'SFMono', ui-monospace, monospace;
+
+  // Sizing
+  --sign-header-height: 5rem; // 80px
+  --sign-footer-height: var(--sign-header-height);
+  --sign-card-width: 28.625rem; // 458px
+  --header-height: calc(3.875rem + 1px); // 62px + 1px
+  --nav-width: 5rem; // 80px
+
+  // Colors
+  --primary-h: 210;
+  --primary-s: 100%;
+  --primary-l: 50%;
+
+  --secondary-h: 0;
+  --secondary-s: 0%;
+  --secondary-l: 42%;
+
+  --danger-h: 360;
+  --danger-s: 56%;
+  --danger-l: 52%;
+
+  --primary: hsl(var(--primary-h) var(--primary-s) var(--primary-l));
+  --primary-hover: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 5%));
+  --primary-active: hsl(var(--primary-h) var(--primary-s) calc(var(--primary-l) - 10%));
+  --primary-focus: hsla(var(--primary-h) var(--primary-s) var(--primary-l) / 0.5);
+
+  --secondary: hsl(var(--secondary-h) var(--secondary-s) var(--secondary-l));
+  --secondary-hover: hsl(var(--secondary-h) var(--secondary-s) calc(var(--secondary-l) - 5%));
+  --secondary-active: hsl(var(--secondary-h) var(--secondary-s) calc(var(--secondary-l) - 10%));
+  --secondary-focus: hsla(var(--secondary-h) var(--secondary-s) var(--secondary-l) / 0.5);
+
+  --danger: hsl(var(--danger-h) var(--danger-s) var(--danger-l));
+  --danger-hover: hsl(var(--danger-h) var(--danger-s) calc(var(--danger-l) - 5%));
+  --danger-active: hsl(var(--danger-h) var(--danger-s) calc(var(--danger-l) - 10%));
+  --danger-focus: hsla(var(--danger-h) var(--danger-s) var(--danger-l) / 0.5);
+
+  --white-color: #fff;
+
+  // Specific colors
+  --section-border-color: #2b2c2e;
+
+  // Transitions
+  --default-transition: all 0.2s ease;
+
+  // Z-indexes
+  --z-index-dropdown: 10;
+  --z-index-modal: 100;
+}

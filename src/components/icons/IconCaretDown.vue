@@ -1,0 +1,7 @@
+<template>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6">
+    <path
+      d="M.916.5a.585.585 0 0 0-.413.999l3.768 3.77c.228.229.6.229.829 0L8.867 1.5A.585.585 0 0 0 8.454.5H.916Z"
+    />
+  </svg>
+</template>

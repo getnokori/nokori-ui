@@ -1,0 +1,68 @@
+# This workflow checks out develop branch and pushes it to development servers
+
+name: Deploy to Production
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the qa branch
+# We do not use pull_request here because that triggers on request opening, not merge. Merging results in a push.
+on:
+  push:
+    branches: [ production ]
+
+    
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "deploy"
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Builds the project using Node 16 and runs unit tests and linting.
+      - name: Checkout Project
+        uses: actions/checkout@main
+      # - uses: shaunco/ssh-agent@git-repo-mapping # this action will configure git to use the right SSH key per each repository. 
+      #   with:
+      #     ssh-private-key: |
+      #       ${{ secrets.QA_SDK_JA_PRIVATE_KEY}}
+      #     repo-mappings: |
+      #       github.com/loladb/sdk-js
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.13.0'
+      
+      # - name: Authenticate with private NPM package
+      #   run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install Dependencies
+        run: npm install
+      - name: Sanity Check
+        run: ls -la
+      - name: Build
+        run: npm run build
+        env:
+          NODE_ENV: "production"
+          MODE: "production"
+      
+      - name: Upload to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.PROD_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'us-east-1'   # optional: defaults to us-east-1
+          SOURCE_DIR: 'dist'      # optional: defaults to entire repository
+
+       # Invalidates cloudfront caches
+      - uses: awact/cloudfront-action@master
+        env:
+          AWS_REGION: 'us-east-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DISTRIBUTION_ID: E1XFH45CK7YXMY

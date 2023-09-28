@@ -1,0 +1,34 @@
+@mixin clear-children-margins {
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@mixin link {
+  color: var(--primary);
+  border-bottom: 1px solid transparent;
+  text-decoration: none;
+  transition: var(--default-transition);
+
+  &:hover {
+    border-bottom-color: var(--primary);
+  }
+}
+
+@mixin text-gradient {
+  background-color: #fff;
+  background-image: linear-gradient(
+    to right,
+    #11998e 0%, 
+    #24C586 50%,
+    #38ef7d 100%
+  );
+  
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

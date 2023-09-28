@@ -1,0 +1,63 @@
+name: Test Branch on Push
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    name: Checkout and Test Code Base
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the current branch
+      - uses: actions/checkout@main
+      - uses: shaunco/ssh-agent@git-repo-mapping # this action will configure git to use the right SSH key per each repository. 
+        with:
+          ssh-private-key: |
+            ${{ secrets.QA_SDK_JA_PRIVATE_KEY}}
+          repo-mappings: |
+            github.com/loladb/sdk-js
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.14.2'
+      
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        
+      - name: Run Install
+        run: |
+          npm prune
+          npm install
+
+      - name: Run Lint
+        run: npm run lint
+
+      - name: Run build
+        run: npm run build
+
+      - name: Notify slack fail
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: eng-builds
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_TITLE: Build Failure
+          SLACK_USERNAME: GitHub Actions
+          # TODO: move this to GitHub secrets
+          # SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+
+      - name: Notify slack success
+        if: success()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: eng-builds
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
+          SLACK_ICON: https://github.com/rtCamp.png?size=48
+          SLACK_TITLE: Build Success
+          SLACK_USERNAME: GitHub Actions
+          # TODO: move this to GitHub secrets
+          # SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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

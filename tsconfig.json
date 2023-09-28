@@ -1,0 +1,16 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "include": ["components.d.ts", "src/**/*", "src/**/*.vue"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "lib": ["DOM", "ES2022"]
+  },
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    }
+  ]
+}

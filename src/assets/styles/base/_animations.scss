@@ -1,0 +1,32 @@
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes infinite-loading-bar {
+  0% {
+    left: 0;
+    width: 0;
+  }
+  25% {
+    left: 0;
+    width: 33%;
+  }
+  50% {
+    left: 15%;
+    width: 50%;
+  }
+  75% {
+    left: 30%;
+    width: 70%;
+  }
+  100% {
+    left: 100%;
+    width: 0;
+  }
+}
